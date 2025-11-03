@@ -106,30 +106,22 @@ const thead = document.createElement('thead')
 const tbody = document.createElement('tbody')
 
 const theadtr = document.createElement('tr')
-// const th1 = document.createElement('th')
-// const th2 = document.createElement('th')
-// const th3 = document.createElement('th')
-
-// th1.textContent = 'Nombre'
-// th2.textContent = 'Apellidos'
-// th3.textContent = 'Email'
-
-// theadtr.appendChild(th1)
-// theadtr.appendChild(th2)
-// theadtr.appendChild(th3)
 
 const cabeceras = ['Nombre', 'Apellidos', 'Email']
 for(let cabecera of cabeceras) {
   const th = document.createElement('th')
   th.textContent = cabecera
+
+  th.addEventListener('click', event => {
+    const numColumna = Array.from(th.parentNode.children).indexOf(th)
+
+    document.querySelectorAll('tr').forEach(fila => {
+      fila.children[numColumna].classList.toggle('activa')
+    })
+  })
+
   theadtr.appendChild(th)
 }
-
-// ['Nombre', 'Apellidos', 'Email'].foreach(cabecera => {
-//   const th = document.createElement('th')
-//   th.textContent = cabecera
-//   theadtr.appendChild(th)
-// })
 
 thead.appendChild(theadtr)
 tabla.appendChild(thead)
@@ -137,24 +129,12 @@ tabla.appendChild(thead)
 for(let cliente of clientes) {
   const tr = document.createElement('tr')
 
-  // const nombre = document.createElement('td')
-  // const apellidos = document.createElement('td')
-  // const email = document.createElement('td')
-
-  // nombre.textContent = cliente.nombre
-  // apellidos.textContent = cliente.apellidos
-  // email.textContent = cliente.email
-
-  // tr.appendChild(nombre)
-  // tr.appendChild(apellidos)
-  // tr.appendChild(email)
-
   for(let clave in cliente) {
     const dato = document.createElement('td')
     dato.textContent = cliente[clave]
     tr.appendChild(dato)
   }
-  
+
   tbody.appendChild(tr)
 }
 
