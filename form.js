@@ -42,3 +42,39 @@ const form = [
 ]
 
 
+const container = document.createElement('main')
+container.id = "main"
+document.querySelector('body').appendChild(container)
+
+const formulario = document.createElement('form')
+
+for(let elem of form) {
+    const div = document.createElement('div')
+
+    if(elem.label) {
+        const etiqueta = document.createElement('label')
+        etiqueta.textContent = elem.label
+        etiqueta.setAttribute('for', elem.id)
+        div.appendChild(etiqueta)
+    }
+
+    const tag = document.createElement(elem.tag)
+    tag.id = elem.id
+    tag.setAttribute('class', elem.class)
+    tag.classList.add(elem.class)
+
+    if(elem.tag === 'input') {
+        tag.setAttribute('type', elem.type)
+        tag.setAttribute('name', elem.name)
+    }
+
+    if(elem.tag === 'button') {
+        tag.textContent = elem.value
+    }
+
+    div.appendChild(tag)
+    formulario.appendChild(div)
+}
+
+
+container.appendChild(formulario)
